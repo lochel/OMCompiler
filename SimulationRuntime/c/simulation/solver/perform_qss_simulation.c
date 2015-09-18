@@ -61,6 +61,23 @@ static modelica_integer getStatesInDer(const unsigned int* index, const unsigned
 static modelica_integer qss_step(DATA* data, SOLVER_INFO* solverInfo);
 static uinteger minStep( const modelica_real* tqp, const uinteger size );
 
+/*! performBQSSSimulation(DATA* data, SOLVER_INFO* solverInfo)
+ *
+ *  \param [ref] [data]
+ *  \param [ref] [solverInfo]
+ *
+ *  This function performs the simulation controlled by solverInfo.
+ */
+modelica_integer prefixedName_performBQSSSimulation(DATA* data, threadData_t *threadData, SOLVER_INFO* solverInfo)
+{
+  TRACE_PUSH
+
+  warningStreamPrint(LOG_STDOUT, 0, "This BQSS method is under development and should not be used yet.");
+
+  TRACE_POP
+  return 0;
+}
+
 /*! performQSSSimulation(DATA* data, SOLVER_INFO* solverInfo)
  *
  *  \param [ref] [data]

@@ -847,6 +847,7 @@ template simulationFile(SimCode simCode, String guid)
     #include <simulation/solver/perform_simulation.c>
 
     #define prefixedName_performQSSSimulation <%symbolName(modelNamePrefixStr,"performQSSSimulation")%>
+    #define prefixedName_performBQSSSimulation <%symbolName(modelNamePrefixStr,"performBQSSSimulation")%>
     #include <simulation/solver/perform_qss_simulation.c>
 
     /* dummy VARINFO and FILEINFO */
@@ -876,6 +877,7 @@ template simulationFile(SimCode simCode, String guid)
     struct OpenModelicaGeneratedFunctionCallbacks <%symbolName(modelNamePrefixStr,"callback")%> = {
        (int (*)(DATA *, threadData_t *, void *)) <%symbolName(modelNamePrefixStr,"performSimulation")%>,
        (int (*)(DATA *, threadData_t *, void *)) <%symbolName(modelNamePrefixStr,"performQSSSimulation")%>,
+       (int (*)(DATA *, threadData_t *, void *)) <%symbolName(modelNamePrefixStr,"performBQSSSimulation")%>,
        <%symbolName(modelNamePrefixStr,"updateContinuousSystem")%>,
        <%symbolName(modelNamePrefixStr,"callExternalObjectConstructors")%>,
        <%symbolName(modelNamePrefixStr,"callExternalObjectDestructors")%>,

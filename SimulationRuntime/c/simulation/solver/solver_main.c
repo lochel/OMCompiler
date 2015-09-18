@@ -208,7 +208,8 @@ int initializeSolverData(DATA* data, threadData_t *threadData, SOLVER_INFO* solv
     solverInfo->solverData = rungeData;
     break;
   }
-  case S_QSS: break;
+  case S_QSS:
+  case S_BQSS: break;
 #if !defined(OMC_MINIMAL_RUNTIME)
   case S_DASSL:
   {
@@ -656,6 +657,22 @@ int solver_main(DATA* data, threadData_t *threadData, const char* init_initMetho
 
       infoStreamPrint(LOG_SOLVER, 0, "Start numerical integration (startTime: %g, stopTime: %g)", simInfo->startTime, simInfo->stopTime);
       retVal = data->callback->performQSSSimulation(data, threadData, &solverInfo);
+      omc_alloc_interface.collect_a_little();
+
+      /* terminate the simulation */
+      finishSimulation(data, threadData, &solverInfo, outputVariablesAtEnd);
+      omc_alloc_interface.collect_a_little();
+    }
+    /* starts the simulation main loop - special solvers */
+    else if(S_BQSS == solverInfo.solverMethod)
+    {
+      sim_result.emit(&sim_result,data,threadData);
+
+      /* overwrite the whole ring-buffer with initialized values */
+      overwriteOldSimulationData(data);
+
+      infoStreamPrint(LOG_SOLVER, 0, "Start numerical integration (startTime: %g, stopTime: %g)", simInfo->startTime, simInfo->stopTime);
+      retVal = data->callback->performBQSSSimulation(data, threadData, &solverInfo);
       omc_alloc_interface.collect_a_little();
 
       /* terminate the simulation */

@@ -126,6 +126,7 @@ enum SOLVER_METHOD
   S_SYM_EULER,     /* 11 */
   S_SYM_IMP_EULER, /* 12 */
   S_QSS,
+  S_BQSS,
 
   S_MAX
 };
