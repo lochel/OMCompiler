@@ -56,20 +56,22 @@ import SimCode;
 // protected imports
 protected
 import BackendDAECreate;
-import ClockIndexes;
+import BackendDump;
 import CevalScriptBackend;
+import ClockIndexes;
+import CodegenAdevs;
 import CodegenC;
+import CodegenCpp;
+import CodegenCppHpcom;
+import CodegenCSharp;
 import CodegenFMU;
 import CodegenFMUCpp;
 import CodegenFMUCppHpcom;
-import CodegenAdevs;
-import CodegenSparseFMI;
-import CodegenCSharp;
-import CodegenCpp;
-import CodegenCppHpcom;
-import CodegenXML;
 import CodegenJava;
 import CodegenJS;
+import CodegenQSS;
+import CodegenSparseFMI;
+import CodegenXML;
 import Config;
 import DAEUtil;
 import Debug;
@@ -80,11 +82,10 @@ import HpcOmSimCodeMain;
 import HpcOmTaskGraph;
 import SerializeModelInfo;
 import SimCodeDump;
-import TaskSystemDump;
 import SimCodeUtil;
 import System;
+import TaskSystemDump;
 import Util;
-import BackendDump;
 
 public function createSimulationSettings
   input Real startTime;
@@ -500,6 +501,10 @@ algorithm
 
     case "sfmi" equation
       Tpl.tplNoret3(CodegenSparseFMI.translateModel, simCode, "2.0", "me");
+    then ();
+
+    case "QSS" equation
+      Tpl.tplNoret(CodegenQSS.translateModel, simCode);
     then ();
 
     case "C" equation

@@ -309,6 +309,7 @@ if true then /* Suppress output */
     "../Template/CodegenJS.mo",
     "../Template/CodegenModelica.mo",
     "../Template/CodegenSparseFMI.mo",
+    "../Template/CodegenQSS.mo",
     "../Template/CodegenXML.mo",
     "../Template/GraphvizDump.mo",
     "../Template/GraphMLDumpTpl.mo",
